@@ -152,7 +152,7 @@ export function BuilderPage() {
   const exportPdf = async () => {
     setExporting(true);
     try {
-      await exportResumePdf(resume.id, resume.templateId, previewRef.current);
+      await exportResumePdf(resume);
       pushToast('success', 'PDF export started.');
     } catch (error) {
       pushToast('error', error instanceof Error ? error.message : 'PDF export failed.');
