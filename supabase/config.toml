@@ -1,0 +1,10 @@
+project_id = "swoerkixnvtannyxotdd"
+
+[functions.auth]
+verify_jwt = false
+
+[functions.resume]
+verify_jwt = true
+
+[functions.user]
+verify_jwt = true

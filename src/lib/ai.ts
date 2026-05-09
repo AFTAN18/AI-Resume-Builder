@@ -1,5 +1,5 @@
 import type { AiEnhancementResult, AtsResult, Resume, Tone } from '../types/resume';
-import { getFunctionUrl, hasSupabaseConfig, supabase } from './supabase';
+import { getFunctionUrl, hasSupabaseConfig, supabase, supabaseApiKey } from './supabase';
 
 interface EnhanceInput {
   resumeId: string;
@@ -59,7 +59,7 @@ export async function enhanceResumeContent(
     method: 'POST',
     headers: {
       Authorization: `Bearer ${session.access_token}`,
-      apikey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
+      apikey: supabaseApiKey ?? '',
       'Content-Type': 'application/json',
       Accept: 'text/event-stream',
     },
@@ -112,7 +112,7 @@ export async function analyzeAts(resume: Resume, jobDescription: string): Promis
     method: 'POST',
     headers: {
       Authorization: `Bearer ${session.access_token}`,
-      apikey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
+      apikey: supabaseApiKey ?? '',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ resumeId: resume.id, jobDescription }),

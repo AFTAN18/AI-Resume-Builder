@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Eye, EyeOff, Mail, UserRound } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFunctionUrl, supabase } from '../../lib/supabase';
+import { getFunctionUrl, supabase, supabaseApiKey } from '../../lib/supabase';
 import { validatePassword } from '../../lib/validators';
 import { Button } from '../ui/Button';
 import { FloatingField } from '../ui/FloatingField';
@@ -245,7 +245,7 @@ async function signupWithPolicy(input: {
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
-      apikey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
+      apikey: supabaseApiKey ?? '',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(input),

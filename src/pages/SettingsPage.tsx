@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { PageTransition } from '../components/layout/PageTransition';
 import { Button } from '../components/ui/Button';
 import { useToast } from '../components/ui/toastContext';
-import { supabase } from '../lib/supabase';
+import { supabase, supabaseApiKey } from '../lib/supabase';
 import { useResumeStore } from '../lib/resumeStore';
 
 export function SettingsPage() {
@@ -43,7 +43,7 @@ export function SettingsPage() {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${session.access_token}`,
-            apikey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
+            apikey: supabaseApiKey ?? '',
           },
         });
         if (!response.ok) throw new Error(`Data export failed with ${response.status}`);
@@ -74,7 +74,7 @@ export function SettingsPage() {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${session.access_token}`,
-            apikey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
+            apikey: supabaseApiKey ?? '',
           },
         });
         if (!response.ok && response.status !== 204) throw new Error(`Deletion failed with ${response.status}`);

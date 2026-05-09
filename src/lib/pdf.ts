@@ -1,5 +1,5 @@
 import type { Resume } from '../types/resume';
-import { getFunctionUrl, hasSupabaseConfig, supabase } from './supabase';
+import { getFunctionUrl, hasSupabaseConfig, supabase, supabaseApiKey } from './supabase';
 
 type PdfDocument = InstanceType<typeof import('jspdf').default>;
 
@@ -28,7 +28,7 @@ export async function exportResumePdf(resume: Resume) {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${session.access_token}`,
-          apikey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
+          apikey: supabaseApiKey ?? '',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ resumeId: resume.id, templateId: resume.templateId }),
